@@ -1,7 +1,6 @@
-ESX = nil
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-	
-ESX.RegisterServerCallback('hhfw:docOnline' , function(source, cb)
+ESX = exports["es_extended"]:getSharedObject()
+
+ESX.RegisterServerCallback('smDoc:docOnline' , function(source, cb)
 	local src = source
 	local Ply = ESX.GetPlayerFromId(src)
 	local xPlayers = ESX.GetPlayers()
@@ -27,8 +26,8 @@ end)
 
 
 
-RegisterServerEvent('hhfw:charge')
-AddEventHandler('hhfw:charge', function()
+RegisterServerEvent('smDoc:charge')
+AddEventHandler('smDoc:charge', function()
 	local src = source
 	local xPlayer = ESX.GetPlayerFromId(src)
 	if xPlayer.getMoney()>= Config.Price then

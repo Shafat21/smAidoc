@@ -1,10 +1,6 @@
-local ESX = nil
-
 Citizen.CreateThread(function()
-	while ESX == nil do
-	   TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-	   Citizen.Wait(200)
-	end
+    ESX = exports["es_extended"]:getSharedObject()
+	Citizen.Wait(200)
 end)
 
 local Active = false
@@ -25,13 +21,13 @@ end)
 
 
 
-RegisterCommand("help", function(source, args, raw)
+RegisterCommand("doctor", function(source, args, raw)
 	if isDead and spam then
-		ESX.TriggerServerCallback('hhfw:docOnline', function(EMSOnline, hasEnoughMoney)
+		ESX.TriggerServerCallback('smDoc:docOnline', function(EMSOnline, hasEnoughMoney)
 
 			if EMSOnline <= Config.Doctor and hasEnoughMoney and spam then
 				SpawnVehicle(GetEntityCoords(PlayerPedId()))
-				TriggerServerEvent('hhfw:charge')
+				TriggerServerEvent('smDoc:charge')
 				Notify("Medic is arriving")
 			else
 				if EMSOnline > Config.Doctor then
